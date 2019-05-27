@@ -11,7 +11,7 @@
         </button>
 
         <!-- newEmail--active -->
-        <form class="newEmail cmailForm" [ngClass]="{'newEmail--active': isNewEmailFormOpen}">
+        <form class="newEmail cmailForm" [ngClass]="{'newEmail--active': isNewEmailFormOpen}" (submit)="sendEmail($event)">
           <div class="newEmail__card demo-card-wide mdl-card mdl-shadow--2dp">
             <div class="newEmail__titleArea mdl-card__title">
               <h2 class="newEmail__title mdl-card__title-text">Novo Email</h2>
@@ -51,7 +51,7 @@
               <!-- ./Form Fields -->
             </div>
             <div class="mdl-card__actions mdl-card--border">
-              <button class="mdl-button">
+              <button type="submit" class="mdl-button">
                 Enviar
               </button>
             </div>

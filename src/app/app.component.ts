@@ -16,4 +16,9 @@ export class AppComponent {
   toogleNewEmailForm() {
     this._isNewEmailFormOpen = !this._isNewEmailFormOpen;
   }
+
+  sendEmail(eventoSubmit: Event) {
+    eventoSubmit.preventDefault();
+    console.log(eventoSubmit);
+  }
 }
