@@ -9,4 +9,9 @@ import { Component } from "@angular/core";
     ]
 })
 
-export class HeaderComponent {}
+export class HeaderComponent {
+    isMenuOpen:boolean = false;
+    toggleMenu() {
+        this.isMenuOpen = !this.isMenuOpen;
+    }
+}
