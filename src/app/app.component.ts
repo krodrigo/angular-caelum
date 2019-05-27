@@ -7,4 +7,13 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'cmail';
+  private _isNewEmailFormOpen:boolean = false;
+
+  get isNewEmailFormOpen() {
+    return this._isNewEmailFormOpen;
+  }
+
+  toogleNewEmailForm() {
+    this._isNewEmailFormOpen = !this._isNewEmailFormOpen;
+  }
 }
