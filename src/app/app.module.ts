@@ -1,15 +1,12 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
 import { NgModule } from '@angular/core';
-
-import { ToastrModule } from 'ngx-toastr';
+import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 
 import { LoginModule } from './modules/login/login.module';
 import { CadastroModule } from './modules/cadastro/cadastro.module';
 import { CaixaDeEntradaModule } from './modules/caixa-de-entrada/caixa-de-entrada.module';
+import { ModuloRoteamento } from './app.routes';
 
 @NgModule({
   declarations: [
@@ -20,8 +17,7 @@ import { CaixaDeEntradaModule } from './modules/caixa-de-entrada/caixa-de-entrad
     LoginModule,
     CadastroModule,
     CaixaDeEntradaModule,
-    BrowserAnimationsModule,
-    ToastrModule.forRoot()
+    ModuloRoteamento
   ],
   providers: [],
   bootstrap: [AppComponent]

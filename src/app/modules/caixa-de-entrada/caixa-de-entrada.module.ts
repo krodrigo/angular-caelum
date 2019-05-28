@@ -8,6 +8,7 @@ import { ToastrModule } from 'ngx-toastr';
 
 import { CaixaDeEntradaComponent } from './caixa-de-entrada.component';
 import { HeaderComponent } from 'src/app/components/header/header.component';
+import { RouterModule } from '@angular/router';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { HeaderComponent } from 'src/app/components/header/header.component';
     CommonModule,
     FormsModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    RouterModule
   ],
   exports: [
     CaixaDeEntradaComponent
