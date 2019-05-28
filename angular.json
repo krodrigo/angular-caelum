@@ -27,7 +27,8 @@
               "src/assets/css/globalFab.css",
               "src/assets/css/tooltip.css",
               "src/assets/css/errorMessages.css",
-              "src/assets/css/newEmail.css"
+              "src/assets/css/newEmail.css",
+              "node_modules/ngx-toastr/toastr.css"
             ],
             "scripts": [],
             "es5BrowserSupport": true

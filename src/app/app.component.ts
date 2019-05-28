@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { Email } from './models/email';
+import { NgForm } from '@angular/forms';
+
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-root',
@@ -8,7 +11,7 @@ import { Email } from './models/email';
 })
 export class AppComponent {
 
-  constructor() {
+  constructor(private toastr: ToastrService) {
     this.email = new Email();
     this.listaEmails = [];
   }
@@ -27,10 +30,29 @@ export class AppComponent {
     this._isNewEmailFormOpen = !this._isNewEmailFormOpen;
   }
 
-  sendEmail(eventoSubmit: Event) {
-    eventoSubmit.preventDefault();
+  sendEmail(formEmail: NgForm) {
+    for (let control in formEmail.controls) {
+      formEmail.controls[control].markAsTouched();
+    }
+
+    if (formEmail.invalid) {
+      this.showFail();
+      return;
+    }
+
     this.listaEmails.push(this.email);
     this.email = new Email();
-    eventoSubmit.target.reset();
+
+    formEmail.reset();
+
+    this.showSuccess();
+  }
+
+  showSuccess() {
+    this.toastr.success('Você acabou de enviar um e-mail!', "CMail");
+  }
+
+  showFail() {
+    this.toastr.error("Você sabe mesmo enviar e-mail?", 'CMail')
   }
 }
