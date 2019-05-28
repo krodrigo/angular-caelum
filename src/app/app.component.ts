@@ -31,7 +31,7 @@ export class AppComponent {
   }
 
   sendEmail(formEmail: NgForm) {
-    for (let control in formEmail.controls) {
+    for (const control in formEmail.controls) {
       formEmail.controls[control].markAsTouched();
     }
 
@@ -51,10 +51,10 @@ export class AppComponent {
   }
 
   showSuccess() {
-    this.toastr.success('Você acabou de enviar um e-mail!', "CMail");
+    this.toastr.success('Você acabou de enviar um e-mail!', 'CMail');
   }
 
   showFail() {
-    this.toastr.error("Você sabe mesmo enviar e-mail?", 'CMail')
+    this.toastr.error('Você sabe mesmo enviar e-mail?', 'CMail');
   }
 }
