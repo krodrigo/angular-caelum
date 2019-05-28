@@ -45,6 +45,8 @@ export class AppComponent {
 
     formEmail.reset();
 
+    this.toogleNewEmailForm();
+
     this.showSuccess();
   }
 
