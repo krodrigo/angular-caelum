@@ -2,11 +2,11 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
+import { ModuloRoteamento } from './app.routes';
 
 import { LoginModule } from './modules/login/login.module';
 import { CadastroModule } from './modules/cadastro/cadastro.module';
 import { CaixaDeEntradaModule } from './modules/caixa-de-entrada/caixa-de-entrada.module';
-import { ModuloRoteamento } from './app.routes';
 
 @NgModule({
   declarations: [

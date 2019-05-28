@@ -7,19 +7,19 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 
 import { CaixaDeEntradaComponent } from './caixa-de-entrada.component';
-import { HeaderComponent } from 'src/app/components/header/header.component';
 import { RouterModule } from '@angular/router';
+import { HeaderModule } from 'src/app/components/header/header.module';
 
 
 @NgModule({
   declarations: [
-    CaixaDeEntradaComponent,
-    HeaderComponent
+    CaixaDeEntradaComponent
   ],
   imports: [
     BrowserModule,
     CommonModule,
     FormsModule,
+    HeaderModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
     RouterModule
