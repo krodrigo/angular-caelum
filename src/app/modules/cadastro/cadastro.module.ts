@@ -8,6 +8,9 @@ import { CadastroComponent } from './cadastro.component';
   ],
   imports: [
     CommonModule
+  ],
+  exports: [
+    CadastroComponent
   ]
 })
 export class CadastroModule { }
