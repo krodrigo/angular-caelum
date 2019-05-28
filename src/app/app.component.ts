@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Email } from './models/email';
 
 @Component({
   selector: 'app-root',
@@ -6,8 +7,17 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+
+  constructor() {
+    this.email = new Email();
+    this.listaEmails = [];
+  }
+
   title = 'cmail';
-  private _isNewEmailFormOpen:boolean = false;
+  listaEmails: Email[];
+  email: Email = new Email();
+
+  private _isNewEmailFormOpen: boolean = false;
 
   get isNewEmailFormOpen() {
     return this._isNewEmailFormOpen;
@@ -19,6 +29,8 @@ export class AppComponent {
 
   sendEmail(eventoSubmit: Event) {
     eventoSubmit.preventDefault();
-    console.log(eventoSubmit);
+    this.listaEmails.push(this.email);
+    this.email = new Email();
+    eventoSubmit.target.reset();
   }
 }
