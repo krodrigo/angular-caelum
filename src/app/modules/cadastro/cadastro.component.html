@@ -3,25 +3,42 @@
   <main class="mdl-layout__content">
     <div class="page-content">
       <div class="mdl-grid">
-        <form>
 
-          <cmail-form-group label="Nome" id-campo="nome">
-            <input type="text" name="nome" cmailFormField>
-            <span class="mdl-textfield__error">Informe o nome</span>
+        <form [formGroup]="formCadastro" (ngSubmit)="cadastrarUsuario()">
+
+          <ul *ngIf="mensagensErro" class="mdl-textfield is-invalid">
+            <li *ngFor="let erro of mensagensErro" class="mdl-textfield__error">
+              {{erro.message}}: {{erro.value}}
+            </li>
+          </ul>
+
+          <cmail-form-group label="Nome" id-campo="nome"
+          [validation]="nome.dirty || nome.touched && nome.invalid">
+            <input type="text" required name="nome" formControlName="nome" cmailFormField>
+            <span *ngIf="nome.getError('required')" class="mdl-textfield__error">Informe o nome</span>
           </cmail-form-group>
 
-          <cmail-form-group label="Username" id-campo="username">
-            <input type="text" name="username" cmailFormField>
-            <span class="mdl-textfield__error">Informe o user name</span>
+          <cmail-form-group label="Username" id-campo="username"
+          [validation]="username.dirty || username.touched && username.invalid">
+            <input type="text" name="username" formControlName="username" cmailFormField>
+            <span *ngIf="username.getError('required')" class="mdl-textfield__error">Informe o user name</span>
+            <span *ngIf="username.getError('minlength')" class="mdl-textfield__error">
+              O username precisa ter no mínimo {{username.getError('minlength').requiredLength}} caracteres
+            </span>
           </cmail-form-group>
 
           <cmail-form-group label="Senha" id-campo="senha">
-            <input type="password" name="senha" cmailFormField>
+            <input type="password" name="senha" formControlName="senha" cmailFormField>
             <span class="mdl-textfield__error">Informe a senha</span>
           </cmail-form-group>
 
+          <cmail-form-group label="Telefone" id-campo="telefone">
+            <input type="tel" name="telefone" formControlName="telefone" cmailFormField>
+            <span class="mdl-textfield__error">Informe o telefone</span>
+          </cmail-form-group>
+
           <cmail-form-group label="Avatar" id-campo="avatar">
-            <input type="text" name="avatar" cmailFormField>
+            <input type="text" name="avatar" formControlName="avatar" cmailFormField>
             <span class="mdl-textfield__error">Informe o avatar</span>
           </cmail-form-group>
 

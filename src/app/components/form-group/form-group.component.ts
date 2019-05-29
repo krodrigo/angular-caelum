@@ -9,6 +9,7 @@ export class FormGroupComponent implements OnInit {
 
   @Input() label: string = '';
   @Input('id-campo') idCampo: string = '';
+  @Input() validation: boolean = false;
 
   constructor() { }
 

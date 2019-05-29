@@ -9,8 +9,6 @@ export class FormFieldDirective implements OnInit {
     ngOnInit() {
         const campo: HTMLInputElement = this.elemento.nativeElement;
 
-        console.log(this.elemento.nativeElement);
-
         if (!campo.name) {
             throw new Error('Para usar a diretiva cmailFormField o atributo name deve ser definido');
         }
