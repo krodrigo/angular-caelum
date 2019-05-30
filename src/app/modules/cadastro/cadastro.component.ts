@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
 import { Router } from '@angular/router';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
 import { ToastrService } from 'ngx-toastr';
 
 import { UsuarioDto } from 'src/app/models/dto/usuarioDto';
+import { Observable } from 'rxjs';
+import { map, catchError } from 'rxjs/operators';
 
 @Component({
   selector: 'cmail-cadastro',
@@ -25,7 +27,7 @@ export class CadastroComponent implements OnInit {
   username = new FormControl('', [Validators.required, Validators.minLength(3)]);
   senha = new FormControl('');
   telefone = new FormControl('');
-  avatar = new FormControl('');
+  avatar = new FormControl('', [Validators.required, this.validaImagem.bind(this)]);
 
   formCadastro = new FormGroup({
     nome: this.nome,
@@ -33,7 +35,40 @@ export class CadastroComponent implements OnInit {
     senha: this.senha,
     telefone: this.telefone,
     avatar: this.avatar
-  })
+  }, { updateOn: 'blur' })
+
+  validaImagem(controle: AbstractControl): Observable<ValidationErrors | null> {
+    const url = controle.value;
+    if (!url) {
+      console.log('url vazia');
+      return null;      
+    }    
+
+    this.http
+      .head(url, { observe: 'response' })
+      .pipe(
+        map((response) => {
+          if (response.ok) {
+            console.log('funcionou');
+            return null;
+          } else {
+            console.error('deu ruim');
+            return { ulrInvalida: 'A url apresentou problemas' };
+          }
+        }),
+        catchError((response) => {
+          console.warn('Caiu no catchError');
+          console.log(response);
+
+          let erroMsg = {
+            urlInvalida: 'URL com bloqueio de CORS',
+            status: response.status
+          }
+
+          return [erroMsg];
+        })
+      ).subscribe();
+  }
 
   cadastrarUsuario() {
     if (this.formCadastro.pristine || this.formCadastro.invalid) {
@@ -44,7 +79,7 @@ export class CadastroComponent implements OnInit {
     const userData = new UsuarioDto(this.formCadastro.value);
 
     this.http
-      .post('http://localhost:3200/users', userData)
+      .post('http://localhost:8080/users', userData)
       .subscribe(
         (response) => {
           this.showSuccess();

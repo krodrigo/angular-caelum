@@ -13,33 +13,47 @@
           </ul>
 
           <cmail-form-group label="Nome" id-campo="nome"
-          [validation]="nome.dirty || nome.touched && nome.invalid">
+          [validation]="(nome.dirty || nome.touched) && nome.invalid">
             <input type="text" required name="nome" formControlName="nome" cmailFormField>
             <span *ngIf="nome.getError('required')" class="mdl-textfield__error">Informe o nome</span>
           </cmail-form-group>
 
           <cmail-form-group label="Username" id-campo="username"
-          [validation]="username.dirty || username.touched && username.invalid">
-            <input type="text" name="username" formControlName="username" cmailFormField>
+          [validation]="(username.dirty || username.touched) && username.invalid">
+            <input type="text" required name="username" formControlName="username" cmailFormField>
             <span *ngIf="username.getError('required')" class="mdl-textfield__error">Informe o user name</span>
             <span *ngIf="username.getError('minlength')" class="mdl-textfield__error">
               O username precisa ter no mínimo {{username.getError('minlength').requiredLength}} caracteres
             </span>
           </cmail-form-group>
 
-          <cmail-form-group label="Senha" id-campo="senha">
-            <input type="password" name="senha" formControlName="senha" cmailFormField>
+          <cmail-form-group label="Senha" id-campo="senha"
+          [validation]="(senha.dirty || senha.touched) && senha.invalid">
+            <input type="password" required name="senha" formControlName="senha" cmailFormField>
             <span class="mdl-textfield__error">Informe a senha</span>
           </cmail-form-group>
 
-          <cmail-form-group label="Telefone" id-campo="telefone">
-            <input type="tel" name="telefone" formControlName="telefone" cmailFormField>
+          <cmail-form-group label="Telefone" id-campo="telefone"
+          [validation]="(telefone.dirty || telefone.touched) && telefone.invalid">
+            <input type="tel" required name="telefone" formControlName="telefone" cmailFormField>
             <span class="mdl-textfield__error">Informe o telefone</span>
           </cmail-form-group>
 
-          <cmail-form-group label="Avatar" id-campo="avatar">
-            <input type="text" name="avatar" formControlName="avatar" cmailFormField>
-            <span class="mdl-textfield__error">Informe o avatar</span>
+          <cmail-form-group label="Avatar" id-campo="avatar"
+          [validation]="(avatar.dirty || avatar.touched) && avatar.invalid">
+            <input type="text" required name="avatar" formControlName="avatar" cmailFormField>
+            <div *ngIf="avatar.status === 'PENDING'" class="mdl-textfield__error mdl-textfield__checking">
+              Checking...
+            </div>
+            <div *ngIf="avatar.status === 'VALID'" class="mdl-textfield__error mdl-textfield__valid">
+              URL válida!
+            </div>
+            <div *ngIf="avatar.getError('urlInvalida')" class="mdl-textfield__error">
+              URL inválida!
+            </div>
+            <div *ngIf="avatar.getError('required')" class="mdl-textfield__error">
+              Informe a url do avatar
+            </div>
           </cmail-form-group>
 
           <div class="mdl-card__actions">
@@ -47,7 +61,7 @@
               Cadastrar
             </button>
           </div>
-
+          
         </form>
       </div>
     </div>
