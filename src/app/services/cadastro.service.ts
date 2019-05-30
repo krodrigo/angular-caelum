@@ -10,10 +10,9 @@ export class CadastroService {
         const dados = new UsuarioDto({ nome, username, senha, telefone, avatar });
 
         return this.http
-            .post(`${environment.cmailApi}login`, dados)
+            .post(`${environment.cmailApi}users`, dados)
             .pipe(
                 map((response: any) => {
-                    localStorage.setItem('cmail-token', response.token);
                     return response;
                 })
             )
