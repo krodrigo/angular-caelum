@@ -1,14 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { ToastrModule } from 'ngx-toastr';
 
 import { CaixaDeEntradaComponent } from './caixa-de-entrada.component';
-import { RouterModule } from '@angular/router';
 import { HeaderModule } from 'src/app/components/header/header.module';
+import { CaixaDeEntradaRoutingModule } from './caixa-de-entrada-routing.module';
 
 
 @NgModule({
@@ -16,13 +14,11 @@ import { HeaderModule } from 'src/app/components/header/header.module';
     CaixaDeEntradaComponent
   ],
   imports: [
-    BrowserModule,
     CommonModule,
     FormsModule,
     HeaderModule,
-    BrowserAnimationsModule,
     ToastrModule.forRoot(),
-    RouterModule
+    CaixaDeEntradaRoutingModule
   ],
   exports: [
     CaixaDeEntradaComponent

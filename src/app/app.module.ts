@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { ToastrService, ToastrModule } from 'ngx-toastr';
 
 import { AppComponent } from './app.component';
 import { ModuloRoteamento } from './app.routes';
-
-import { LoginModule } from './modules/login/login.module';
-import { CadastroModule } from './modules/cadastro/cadastro.module';
-import { CaixaDeEntradaModule } from './modules/caixa-de-entrada/caixa-de-entrada.module';
+import { LoginService } from './services/login.service';
 
 @NgModule({
   declarations: [
@@ -14,12 +14,14 @@ import { CaixaDeEntradaModule } from './modules/caixa-de-entrada/caixa-de-entrad
   ],
   imports: [
     BrowserModule,
-    LoginModule,
-    CadastroModule,
-    CaixaDeEntradaModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
     ModuloRoteamento
   ],
-  providers: [],
+  exports: [
+    BrowserAnimationsModule
+  ],
+  providers: [LoginService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

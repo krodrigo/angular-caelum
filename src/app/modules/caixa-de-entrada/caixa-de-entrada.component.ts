@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-
 import { NgForm } from '@angular/forms';
 
 import { ToastrService } from 'ngx-toastr';
+
 import { Email } from 'src/app/models/email';
 
 @Component({
@@ -12,8 +12,9 @@ import { Email } from 'src/app/models/email';
 })
 export class CaixaDeEntradaComponent {
 
-
-  constructor(private toastr: ToastrService) {
+  constructor(
+    private toastr: ToastrService
+    ) {
     this.email = new Email();
     this.listaEmails = [];
   }

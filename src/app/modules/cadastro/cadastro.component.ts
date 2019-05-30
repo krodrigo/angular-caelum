@@ -4,10 +4,10 @@ import { Router } from '@angular/router';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
 import { ToastrService } from 'ngx-toastr';
-
-import { UsuarioDto } from 'src/app/models/dto/usuarioDto';
 import { Observable } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
+
+import { UsuarioDto } from 'src/app/models/dto/usuarioDto';
 
 @Component({
   selector: 'cmail-cadastro',
@@ -16,7 +16,9 @@ import { map, catchError } from 'rxjs/operators';
 })
 export class CadastroComponent implements OnInit {
 
-  constructor(private toastr: ToastrService, private roteader: Router, private http: HttpClient) { }
+  constructor(
+    private toastr: ToastrService, 
+    private roteader: Router, private http: HttpClient) { }
 
   ngOnInit() {
   }
@@ -40,7 +42,6 @@ export class CadastroComponent implements OnInit {
   validaImagem(controle: AbstractControl): Observable<ValidationErrors | null> {
     const url = controle.value;
     if (!url) {
-      console.log('url vazia');
       return null;      
     }    
 
@@ -49,7 +50,6 @@ export class CadastroComponent implements OnInit {
       .pipe(
         map((response) => {
           if (response.ok) {
-            console.log('funcionou');
             return null;
           } else {
             console.error('deu ruim');
@@ -57,9 +57,6 @@ export class CadastroComponent implements OnInit {
           }
         }),
         catchError((response) => {
-          console.warn('Caiu no catchError');
-          console.log(response);
-
           let erroMsg = {
             urlInvalida: 'URL com bloqueio de CORS',
             status: response.status
