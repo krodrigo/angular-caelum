@@ -5,6 +5,8 @@ import { ToastrService } from 'ngx-toastr';
 
 import { Email } from 'src/app/models/email';
 
+import { EmailService } from 'src/app/services/email.service';
+
 @Component({
   selector: 'cmail-caixa-de-entrada',
   templateUrl: './caixa-de-entrada.component.html',
@@ -13,8 +15,9 @@ import { Email } from 'src/app/models/email';
 export class CaixaDeEntradaComponent {
 
   constructor(
-    private toastr: ToastrService
-    ) {
+    private toastr: ToastrService,
+    private servico: EmailService
+  ) {
     this.email = new Email();
     this.listaEmails = [];
   }
@@ -43,14 +46,18 @@ export class CaixaDeEntradaComponent {
       return;
     }
 
-    this.listaEmails.push(this.email);
-    this.email = new Email();
+    this.servico.enviar(this.email)
+      .subscribe(
+        res => {
+          this.listaEmails.push(res);
+          this.email = new Email();
 
-    formEmail.reset();
+          formEmail.reset();
 
-    this.toogleNewEmailForm();
+          this.toogleNewEmailForm();
+          this.showSuccess();
+        });
 
-    this.showSuccess();
   }
 
   showSuccess() {
