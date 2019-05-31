@@ -37,7 +37,7 @@ export class CaixaDeEntradaComponent implements OnInit {
       .valorDoFiltro
       .subscribe(novoValor => {
         this.termoParaFiltro = novoValor;
-        this.filterEmails(novoValor);
+        this.filterEmails();
       });
   }
 
@@ -99,8 +99,8 @@ export class CaixaDeEntradaComponent implements OnInit {
     }
   }
 
-  filterEmails(novoValor: string) {
-    this.listaEmails = this.listaEmails.filter(item => item.assunto.includes(novoValor));
+  filterEmails() {
+    return this.listaEmails.filter(item => item.assunto.includes(this.termoParaFiltro));
   }
 
   showSuccess(mensagem: string) {

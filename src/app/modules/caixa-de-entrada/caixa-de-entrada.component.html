@@ -4,7 +4,7 @@
     <div class="page-content">
 
       <ul class="mdl-list">
-        <cmail-list-item *ngFor="let email of listaEmails.reverse()" [dados-email]="email" (apagarEmailEvent)="deleteEmail($event, email.codigo)"></cmail-list-item>
+        <cmail-list-item *ngFor="let email of filterEmails().reverse()" [dados-email]="email" (apagarEmailEvent)="deleteEmail($event, email.codigo)"></cmail-list-item>
       </ul>
 
       <div class="mdl-grid">
