@@ -10,6 +10,7 @@ import { CaixaDeEntradaRoutingModule } from './caixa-de-entrada-routing.module';
 
 import { HeaderModule } from 'src/app/components/header/header.module';
 import { EmailService } from 'src/app/services/email.service';
+import { ListItemModule } from './list-item/list-item.module';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { EmailService } from 'src/app/services/email.service';
     FormsModule,
     HttpClientModule,
     HeaderModule,
+    ListItemModule,
     ToastrModule.forRoot(),
     CaixaDeEntradaRoutingModule
   ],

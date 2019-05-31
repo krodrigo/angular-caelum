@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
 import { ToastrService } from 'ngx-toastr';
@@ -12,7 +12,7 @@ import { EmailService } from 'src/app/services/email.service';
   templateUrl: './caixa-de-entrada.component.html',
   styles: []
 })
-export class CaixaDeEntradaComponent {
+export class CaixaDeEntradaComponent implements OnInit {
 
   constructor(
     private toastr: ToastrService,
@@ -20,6 +20,14 @@ export class CaixaDeEntradaComponent {
   ) {
     this.email = new Email();
     this.listaEmails = [];
+  }
+
+  ngOnInit() {
+    this.servico
+      .listar().subscribe(
+        res => this.listaEmails = res,
+        err => console.error(err)
+      );
   }
 
   title = 'cmail';
@@ -58,6 +66,12 @@ export class CaixaDeEntradaComponent {
           this.showSuccess();
         });
 
+  }
+
+  deleteEmail(evento: Event) {
+    console.log('capturou o evento', evento);
+    //this.servico.apagar(evento.target)
+    
   }
 
   showSuccess() {

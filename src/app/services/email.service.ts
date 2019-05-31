@@ -32,4 +32,43 @@ export class EmailService {
                 })
             )
     }
+
+    listar(): Observable<Email[]> {
+        const options = {
+            headers: new HttpHeaders(
+                {
+                    'Authorization': localStorage.getItem('cmail-token')
+                })
+        };
+
+        let emails: Email[] = [];
+
+        return this.http
+            .get<EmailPost[]>(`${environment.cmailApi}emails`, options)
+            .pipe(
+                map(
+                    (emailList) => {
+                        return emailList.map((email) => {
+                            return new EmailGet(email)
+                        })
+                    }
+                )
+            )
+    }
+
+    apagar(codigo: string) {
+        const options = {
+            headers: new HttpHeaders(
+                {
+                    'Authorization': localStorage.getItem('cmail-token')
+                })
+        };
+
+        return this.http
+        .delete(`${environment.cmailApi}emails/${codigo}`, options)
+        .pipe(
+            map(resp => console.log(resp)
+            )
+        )
+    }
 }
