@@ -12,10 +12,12 @@ import { HeaderModule } from 'src/app/components/header/header.module';
 import { ListItemModule } from './list-item/list-item.module';
 import { EmailService } from 'src/app/services/email.service';
 import { PageDataService } from 'src/app/services/page-data.service';
+import { FiltroPorAssuntoPipe } from './filtro-por-assunto.pipe';
 
 @NgModule({
   declarations: [
-    CaixaDeEntradaComponent
+    CaixaDeEntradaComponent,
+    FiltroPorAssuntoPipe
   ],
   imports: [
     CommonModule,

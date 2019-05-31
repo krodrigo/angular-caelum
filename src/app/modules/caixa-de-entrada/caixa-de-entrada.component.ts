@@ -7,18 +7,19 @@ import { Email } from 'src/app/models/email';
 
 import { EmailService } from 'src/app/services/email.service';
 import { PageDataService } from 'src/app/services/page-data.service';
+import { HeaderDataService } from 'src/app/components/header/header-data.services';
 
 @Component({
   selector: 'cmail-caixa-de-entrada',
-  templateUrl: './caixa-de-entrada.component.html',
-  styles: []
+  templateUrl: './caixa-de-entrada.component.html'
 })
 export class CaixaDeEntradaComponent implements OnInit {
 
   constructor(
     private toastr: ToastrService,
     private servico: EmailService,
-    private pageService: PageDataService
+    private pageService: PageDataService,
+    private headerService: HeaderDataService
   ) {
     this.email = new Email();
     this.listaEmails = [];
@@ -31,10 +32,19 @@ export class CaixaDeEntradaComponent implements OnInit {
         res => this.listaEmails = res,
         err => console.error(err)
       );
+
+    this.headerService
+      .valorDoFiltro
+      .subscribe(novoValor => {
+        this.termoParaFiltro = novoValor;
+        this.filterEmails(novoValor);
+      });
   }
 
   title = 'cmail';
-  listaEmails: Email[];
+  termoParaFiltro: string = '';
+
+  listaEmails: Email[] = [];
   email: Email = new Email();
 
   private _isNewEmailFormOpen: boolean = false;
@@ -68,7 +78,6 @@ export class CaixaDeEntradaComponent implements OnInit {
           this.toogleNewEmailForm();
           this.showSuccess('Você acabou de enviar um e-mail!');
         });
-
   }
 
   deleteEmail(evento: Event, codigo: string) {
@@ -88,6 +97,10 @@ export class CaixaDeEntradaComponent implements OnInit {
         this.listaEmails.splice(index, 1);
       }
     }
+  }
+
+  filterEmails(novoValor: string) {
+    this.listaEmails = this.listaEmails.filter(item => item.assunto.includes(novoValor));
   }
 
   showSuccess(mensagem: string) {

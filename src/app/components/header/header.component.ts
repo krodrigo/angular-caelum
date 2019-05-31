@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { PageDataService } from 'src/app/services/page-data.service';
+import { HeaderDataService } from './header-data.services';
 
 @Component({
     selector: 'cmail-header',
@@ -12,7 +13,10 @@ import { PageDataService } from 'src/app/services/page-data.service';
 
 export class HeaderComponent {
 
-    constructor(private pageService: PageDataService) {
+    constructor(
+        private pageService: PageDataService,
+        private headerService: HeaderDataService
+        ) {
         this.pageService.titulo
             .subscribe(novoTitulo => this.tituloDaPagina = `CMail - ${novoTitulo}`);
     }
@@ -25,6 +29,6 @@ export class HeaderComponent {
     }
 
     filtrarEmails(filtro: string) {
-        console.log(filtro);
+        this.headerService.atualizarTermoDeFiltro(filtro);
     }
 }
