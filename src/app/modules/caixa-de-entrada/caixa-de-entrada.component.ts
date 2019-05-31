@@ -6,6 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Email } from 'src/app/models/email';
 
 import { EmailService } from 'src/app/services/email.service';
+import { PageDataService } from 'src/app/services/page-data.service';
 
 @Component({
   selector: 'cmail-caixa-de-entrada',
@@ -16,13 +17,15 @@ export class CaixaDeEntradaComponent implements OnInit {
 
   constructor(
     private toastr: ToastrService,
-    private servico: EmailService
+    private servico: EmailService,
+    private pageService: PageDataService
   ) {
     this.email = new Email();
     this.listaEmails = [];
   }
 
   ngOnInit() {
+    this.pageService.atualizarTitulo('Inbox');
     this.servico
       .listar().subscribe(
         res => this.listaEmails = res,
@@ -63,22 +66,39 @@ export class CaixaDeEntradaComponent implements OnInit {
           formEmail.reset();
 
           this.toogleNewEmailForm();
-          this.showSuccess();
+          this.showSuccess('Você acabou de enviar um e-mail!');
         });
 
   }
 
-  deleteEmail(evento: Event) {
-    console.log('capturou o evento', evento);
-    //this.servico.apagar(evento.target)
-    
+  deleteEmail(evento: Event, codigo: string) {
+    this.servico.apagar(codigo)
+      .subscribe(
+        () => {
+          this.removerEmailLista(codigo);
+          this.showInfo('E-mail excluído!');
+        },
+        err => console.error(err)
+      )
   }
 
-  showSuccess() {
-    this.toastr.success('Você acabou de enviar um e-mail!', 'CMail');
+  removerEmailLista(codigo: string) {
+    for (let index = 0; index < this.listaEmails.length; index++) {
+      if (this.listaEmails[index].codigo === codigo) {
+        this.listaEmails.splice(index, 1);
+      }
+    }
+  }
+
+  showSuccess(mensagem: string) {
+    this.toastr.success(mensagem, 'CMail');
   }
 
   showFail() {
     this.toastr.error('Você sabe mesmo enviar e-mail?', 'CMail');
+  }
+
+  showInfo(mensagem: string) {
+    this.toastr.info(mensagem, 'CMail');
   }
 }

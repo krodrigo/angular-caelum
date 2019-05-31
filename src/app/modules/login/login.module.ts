@@ -8,6 +8,7 @@ import { LoginComponent } from './login.component';
 import { LoginRoutingModule } from './login-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { LoginService } from 'src/app/services/login.service';
+import { PageDataService } from 'src/app/services/page-data.service';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { LoginService } from 'src/app/services/login.service';
     LoginComponent
   ],
   providers: [
-    LoginService
+    LoginService,
+    PageDataService
   ]
 })
 export class LoginModule { }

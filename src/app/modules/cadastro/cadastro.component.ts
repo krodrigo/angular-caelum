@@ -8,6 +8,7 @@ import { Observable } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 
 import { UsuarioDto } from 'src/app/models/dto/usuarioDto';
+import { PageDataService } from 'src/app/services/page-data.service';
 
 @Component({
   selector: 'cmail-cadastro',
@@ -17,10 +18,12 @@ import { UsuarioDto } from 'src/app/models/dto/usuarioDto';
 export class CadastroComponent implements OnInit {
 
   constructor(
-    private toastr: ToastrService, 
+    private toastr: ToastrService,
+    private pageService: PageDataService,
     private roteader: Router, private http: HttpClient) { }
 
   ngOnInit() {
+    this.pageService.atualizarTitulo('Cadastro');
   }
 
   mensagensErro: string = '';

@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 
 import { LoginService } from 'src/app/services/login.service';
+import { PageDataService } from 'src/app/services/page-data.service';
 
 @Component({
   selector: 'cmail-login',
@@ -17,9 +18,11 @@ export class LoginComponent implements OnInit {
   constructor(
     private roteader: Router,
     private toastr: ToastrService,
-    private servico: LoginService) { }
+    private servico: LoginService,
+    private pageService: PageDataService) { }
 
   ngOnInit() {
+    this.pageService.atualizarTitulo('Login');
     this.servico.logoff();
   }
 

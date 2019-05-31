@@ -10,6 +10,7 @@ import { FormGroupModule } from 'src/app/components/form-group/form-group.module
 
 import { CadastroComponent } from './cadastro.component';
 import { CadastroRoutingModule } from './cadastro-routing.module';
+import { PageDataService } from 'src/app/services/page-data.service';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,9 @@ import { CadastroRoutingModule } from './cadastro-routing.module';
     ReactiveFormsModule,
     HttpClientModule,
     CadastroRoutingModule
+  ],
+  providers: [
+    PageDataService
   ],
   exports: [
     CadastroComponent

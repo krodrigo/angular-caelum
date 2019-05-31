@@ -12,63 +12,59 @@ import { EmailGet } from '../models/dto/email-get';
 
 @Injectable()
 export class EmailService {
-    constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) { }
 
-    enviar(email: Email): Observable<Email> {
+  enviar(email: Email): Observable<Email> {
 
-        const emailpost = new EmailPost(email);
-        const options = {
-            headers: new HttpHeaders(
-                {
-                    'Authorization': localStorage.getItem('cmail-token')
-                })
-        };
+    const emailpost = new EmailPost(email);
+    const options = {
+      headers: new HttpHeaders(
+        {
+          'Authorization': localStorage.getItem('cmail-token')
+        })
+    };
 
-        return this.http
-            .post<EmailPost>(`${environment.cmailApi}emails`, emailpost, options)
-            .pipe<Email>(
-                map(resp => {
-                    return new EmailGet(resp);
-                })
-            )
-    }
+    return this.http
+      .post<EmailPost>(`${environment.cmailApi}emails`, emailpost, options)
+      .pipe<Email>(
+        map(resp => {
+          return new EmailGet(resp);
+        })
+      )
+  }
 
-    listar(): Observable<Email[]> {
-        const options = {
-            headers: new HttpHeaders(
-                {
-                    'Authorization': localStorage.getItem('cmail-token')
-                })
-        };
+  listar(): Observable<Email[]> {
+    const options = {
+      headers: new HttpHeaders(
+        {
+          'Authorization': localStorage.getItem('cmail-token')
+        })
+    };
 
-        let emails: Email[] = [];
+    let emails: Email[] = [];
 
-        return this.http
-            .get<EmailPost[]>(`${environment.cmailApi}emails`, options)
-            .pipe(
-                map(
-                    (emailList) => {
-                        return emailList.map((email) => {
-                            return new EmailGet(email)
-                        })
-                    }
-                )
-            )
-    }
-
-    apagar(codigo: string) {
-        const options = {
-            headers: new HttpHeaders(
-                {
-                    'Authorization': localStorage.getItem('cmail-token')
-                })
-        };
-
-        return this.http
-        .delete(`${environment.cmailApi}emails/${codigo}`, options)
-        .pipe(
-            map(resp => console.log(resp)
-            )
+    return this.http
+      .get<EmailPost[]>(`${environment.cmailApi}emails`, options)
+      .pipe(
+        map(
+          (emailList) => {
+            return emailList.map((email) => {
+              return new EmailGet(email)
+            })
+          }
         )
-    }
+      )
+  }
+
+  apagar(codigo: string): Observable<Object> {
+    const options = {
+      headers: new HttpHeaders(
+        {
+          'Authorization': localStorage.getItem('cmail-token')
+        })
+    };
+
+    return this.http
+      .delete(`${environment.cmailApi}emails/${codigo}`, options);
+  }
 }

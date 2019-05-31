@@ -9,8 +9,9 @@ import { CaixaDeEntradaComponent } from './caixa-de-entrada.component';
 import { CaixaDeEntradaRoutingModule } from './caixa-de-entrada-routing.module';
 
 import { HeaderModule } from 'src/app/components/header/header.module';
-import { EmailService } from 'src/app/services/email.service';
 import { ListItemModule } from './list-item/list-item.module';
+import { EmailService } from 'src/app/services/email.service';
+import { PageDataService } from 'src/app/services/page-data.service';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { ListItemModule } from './list-item/list-item.module';
     CaixaDeEntradaComponent
   ],
   providers: [
-    EmailService
+    EmailService,
+    PageDataService
   ]
 })
 export class CaixaDeEntradaModule { }
